@@ -1,18 +1,18 @@
 /*
- * Copyright (C) 2007 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+* Copyright (C) 2007 The Android Open Source Project
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
 #include <stdbool.h>
 #include <stdlib.h>
@@ -40,13 +40,13 @@
 
 #if defined(RECOVERY_BGRA)
 #define PIXEL_FORMAT GGL_PIXEL_FORMAT_BGRA_8888
-#define PIXEL_SIZE   4
+#define PIXEL_SIZE 4
 #elif defined(RECOVERY_RGBX)
 #define PIXEL_FORMAT GGL_PIXEL_FORMAT_RGBX_8888
-#define PIXEL_SIZE   4
+#define PIXEL_SIZE 4
 #else
 #define PIXEL_FORMAT GGL_PIXEL_FORMAT_RGB_565
-#define PIXEL_SIZE   2
+#define PIXEL_SIZE 2
 #endif
 
 #define NUM_BUFFERS 2
@@ -90,39 +90,39 @@ static int get_framebuffer(GGLSurface *fb)
     }
 
     vi.bits_per_pixel = PIXEL_SIZE * 8;
-	if (ioctl(fd, FBIOPUT_VSCREENINFO, &vi) < 0) {
+if (ioctl(fd, FBIOPUT_VSCREENINFO, &vi) < 0) {
         perror("failed to put fb0 info");
         close(fd);
         return -1;
     } else fprintf(stderr,"Successfuly set bpp vi to %d\n", vi.bits_per_pixel);
-	
+
     if (PIXEL_FORMAT == GGL_PIXEL_FORMAT_BGRA_8888) {
-      vi.red.offset     = 8;
-      vi.red.length     = 8;
-      vi.green.offset   = 16;
-      vi.green.length   = 8;
-      vi.blue.offset    = 24;
-      vi.blue.length    = 8;
-      vi.transp.offset  = 0;
-      vi.transp.length  = 8;
+      vi.red.offset = 8;
+      vi.red.length = 8;
+      vi.green.offset = 16;
+      vi.green.length = 8;
+      vi.blue.offset = 24;
+      vi.blue.length = 8;
+      vi.transp.offset = 0;
+      vi.transp.length = 8;
     } else if (PIXEL_FORMAT == GGL_PIXEL_FORMAT_RGBX_8888) {
-      vi.red.offset     = 24;
-      vi.red.length     = 8;
-      vi.green.offset   = 16;
-      vi.green.length   = 8;
-      vi.blue.offset    = 8;
-      vi.blue.length    = 8;
-      vi.transp.offset  = 0;
-      vi.transp.length  = 8;
+      vi.red.offset = 24;
+      vi.red.length = 8;
+      vi.green.offset = 16;
+      vi.green.length = 8;
+      vi.blue.offset = 8;
+      vi.blue.length = 8;
+      vi.transp.offset = 0;
+      vi.transp.length = 8;
     } else { /* RGB565*/
-      vi.red.offset     = 11;
-      vi.red.length     = 5;
-      vi.green.offset   = 5;
-      vi.green.length   = 6;
-      vi.blue.offset    = 0;
-      vi.blue.length    = 5;
-      vi.transp.offset  = 0;
-      vi.transp.length  = 0;
+      vi.red.offset = 11;
+      vi.red.length = 5;
+      vi.green.offset = 5;
+      vi.green.length = 6;
+      vi.blue.offset = 0;
+      vi.blue.length = 5;
+      vi.transp.offset = 0;
+      vi.transp.length = 0;
     }
     if (ioctl(fd, FBIOPUT_VSCREENINFO, &vi) < 0) {
         perror("failed to put fb0 info");
@@ -199,7 +199,7 @@ void gr_flip(void)
         gr_active_fb = (gr_active_fb + 1) & 1;
 
     /* copy data from the in-memory surface to the buffer we're about
-     * to make active. */
+* to make active. */
     memcpy(gr_framebuffer[gr_active_fb].data, gr_mem_surface.data,
            fi.line_length * vi.yres);
 
